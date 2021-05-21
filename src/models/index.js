@@ -13,10 +13,12 @@ database.mongoose = mongoose;
 //require mongoose models
 database.user = require('./mongoose.user.model');
 database.role = require('./mongoose.role.model');
+database.product = require('./mongoose.product.model');
+database.site = require('./mongoose.site.model');
 // database.post = require('./mongoose.post.model');
 // database.friend = require('./mongoose.friend.model');
 
 //define default roles
-database.roleNames = ['user','administrator','moderator'];
+database.roleNames = ['customer','administrator'];
 
 module.exports = database;

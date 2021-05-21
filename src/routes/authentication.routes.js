@@ -18,13 +18,13 @@ module.exports = function (application) {
         next();
     });
 
-    //api (POST) SignUp
+    //api (POST) signUp
     application.post("/api/authentication/signup", [validateSignUp.validateDuplicateUsernameEmail, validateSignUp.validateRoles], controller.signUp);
 
-    //api (POST) login
-    application.post('/api/authentication/signin', controller.login);
+    //api (POST) signIn
+    application.post('/api/authentication/signin', controller.signIn);
 
     //api (DELETE) user
-    // application.delete('/api/authentication/remove', [authenticationJwt.validateToken], controller.removeUser);
+    application.delete('/api/authentication/remove', [authenticationJwt.validateToken], controller.removeUser);
 
 };

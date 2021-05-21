@@ -17,6 +17,8 @@ exports.signUp = (request, response) => {
 
     const user = new User({
 
+        firstName: request.body.firstName,
+        lastName: request.body.lastName,
         username: request.body.username,
         emailAddress: request.body.emailAddress,
         password: bcryptHash.hashSync(request.body.password, 8)
@@ -86,7 +88,7 @@ exports.signUp = (request, response) => {
 
             //no roleName passed in request header - set default user
             Role.findOne({
-                    roleName: "user"
+                    roleName: "customer"
                 })
                 .exec(function (error, roleName) {
 
@@ -128,11 +130,11 @@ exports.signUp = (request, response) => {
 };
 
 //handle sign in
-exports.login = (request, response) => {
+exports.signIn = (request, response) => {
 
     //find one document in a collection that matches query
     User.findOne({
-            username: request.body.username
+            emailAddress: request.body.emailAddress
         })
         //allow access to password field
         .select('+password')
@@ -200,7 +202,6 @@ exports.login = (request, response) => {
 };
 
 //handle deletion of user, posts and friends
-/*
 exports.removeUser = (request, response) => {
 
     User.deleteOne({
@@ -230,61 +231,14 @@ exports.removeUser = (request, response) => {
                 });
             }
 
-            Post.deleteMany({
-                    userId: request.query.userId
-                })
-                .exec(function (error, post) {
+            response.status(200).send("User successfully removed.");
 
-                    //handle error and send 500 response
-                    if (error) {
-
-                        response.status(500).send({
-
-                            message: error
-
-                        });
-
-                        return;
-                    }
-
-                    Friend.deleteMany({
-                            //handle both types of friend requests
-                            $or: [{
-                                    sourceUserId: {
-                                        $in: request.query.userId
-                                    }
-                                },
-                                {
-                                    targetUserId: {
-                                        $in: request.query.userId
-                                    }
-                                }
-                            ]
-                        })
-                        .exec(function (error, friend) {
-
-                            //handle error and send 500 response
-                            if (error) {
-
-                                response.status(500).send({
-
-                                    message: error
-
-                                });
-
-                                return;
-                            }
-
-                            response.status(200).send("User, posts and friends successfully removed.");
-
-                        });
-
-                });
+            //TODO: remove all associated orders
 
         });
 
 }
-*/
+
 //validate password using bcrypt
 function validatePassword(requestPassword, password) {
 
