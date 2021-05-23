@@ -15,6 +15,7 @@ database.user = require('./mongoose.user.model');
 database.role = require('./mongoose.role.model');
 database.product = require('./mongoose.product.model');
 database.site = require('./mongoose.site.model');
+database.shoppingcart = require('./mongoose.shoppingcart.model');
 // database.post = require('./mongoose.post.model');
 // database.friend = require('./mongoose.friend.model');
 

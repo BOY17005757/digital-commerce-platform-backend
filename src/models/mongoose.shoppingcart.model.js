@@ -5,14 +5,11 @@ const mongoose = require('mongoose');
 const ShoppingCart = mongoose.model(
     "ShoppingCart",
     new mongoose.Schema({
-        // name: String,
-        // description: String,
-        // price: String,
-        // image: String,
         userId: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
-        }]
+        }],
+        productId: String
     }, {
         timestamps: true
     })

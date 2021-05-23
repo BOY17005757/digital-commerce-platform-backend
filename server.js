@@ -112,5 +112,6 @@ function initialise() {
 // //define api routes
 require('./src/routes/authentication.routes')(application);
 require('./src/routes/user.routes')(application);
+require('./src/routes/product.routes')(application);
 // require('./src/routes/friends.routes')(application);
 // require('./src/routes/posts.routes')(application);

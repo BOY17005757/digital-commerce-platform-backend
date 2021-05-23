@@ -3,11 +3,47 @@ const database = require('../models');
 const Post = database.post;
 const User = database.user;
 const Friend = database.friend;
+const Product = database.product;
 
 //public access - return 200 OK response
 exports.publicAccess = (request, response) => {
 
-    response.status(200).send("Public Content.");
+    // response.status(200).send("Public Content.");
+
+    //find all products
+    // Product.find({})
+    // //populate document references
+    // // .populate('roleNames', 'roleName')
+    // .sort({
+    //     createdAt: 'descending'
+    // })
+    // .exec(function (error, products) {
+
+    //     //handle error and send 500 response
+    //     if (error) {
+
+    //         response.status(500).send({
+
+    //             message: error
+
+    //         });
+
+    //         return;
+    //     }
+
+    //     //no products found
+    //     if (!products) {
+
+    //         return response.status(404).send({
+
+    //             message: "Products Not found."
+
+    //         });
+    //     }
+
+    //     response.status(200).send(products);
+
+    // });
 
 };
 

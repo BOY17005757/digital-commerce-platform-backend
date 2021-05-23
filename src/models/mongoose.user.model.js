@@ -9,6 +9,10 @@ const User = mongoose.model(
         lastName: String,
         username: String,
         emailAddress: String,
+        status: { 
+            type: Boolean,
+            default: true 
+        },
         //password not returned in query by default
         password: {
             type: String,

@@ -8,7 +8,7 @@ const Product = mongoose.model(
         name: String,
         description: String,
         price: String,
-        image: String,
+        status: Boolean,
     }, {
         timestamps: true
     })
