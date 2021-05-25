@@ -9,7 +9,11 @@ const ShoppingCart = mongoose.model(
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         }],
-        productId: String
+        productId: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Product"
+        }],
+        quantity: Number,
     }, {
         timestamps: true
     })
