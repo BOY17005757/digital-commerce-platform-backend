@@ -16,8 +16,9 @@ database.role = require('./mongoose.role.model');
 database.product = require('./mongoose.product.model');
 database.site = require('./mongoose.site.model');
 database.shoppingcart = require('./mongoose.shoppingcart.model');
-// database.post = require('./mongoose.post.model');
-// database.friend = require('./mongoose.friend.model');
+database.ordertype = require('./mongoose.ordertype.model');
+database.orderheader = require('./mongoose.orderheader.model');
+database.orderline = require('./mongoose.orderline.model');
 
 //define default roles
 database.roleNames = ['customer','administrator'];

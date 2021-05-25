@@ -49,6 +49,7 @@ const databaseConfig = require('./src/config/database.config');
 //require database models
 const database = require('./src/models');
 const Role = database.role;
+const OrderType = database.ordertype;
 
 //connect to mongodb
 database.mongoose.connect(databaseConfig.mongoAtlasUri, {
@@ -103,6 +104,40 @@ function initialise() {
                     }
                 });
             });
+        }
+
+    });
+
+    const orderTypeArray = ['collection', 'delivery'];
+
+    OrderType.estimatedDocumentCount(function (error, count) {
+
+        //no order types exist in mongodb
+        if (!error && count === 0) {
+        
+            //loop order type array
+            orderTypeArray.forEach(function(element) {
+
+                //create order type
+                new OrderType({
+
+                    name: element
+
+                }).save(function (error) {
+
+                    //handle error
+                    if (error) {
+
+                        console.log("error", error);
+
+                    } else {
+
+                        console.log(element," added to order type collection.");
+
+                    }
+                });
+            });
+
         }
 
     });
