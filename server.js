@@ -108,39 +108,39 @@ function initialise() {
 
     });
 
-    const orderTypeArray = ['collection', 'delivery'];
+    // const orderTypeArray = ['collection', 'delivery'];
 
-    OrderType.estimatedDocumentCount(function (error, count) {
+    // OrderType.estimatedDocumentCount(function (error, count) {
 
-        //no order types exist in mongodb
-        if (!error && count === 0) {
+    //     //no order types exist in mongodb
+    //     if (!error && count === 0) {
         
-            //loop order type array
-            orderTypeArray.forEach(function(element) {
+    //         //loop order type array
+    //         orderTypeArray.forEach(function(element) {
 
-                //create order type
-                new OrderType({
+    //             //create order type
+    //             new OrderType({
 
-                    name: element
+    //                 name: element
 
-                }).save(function (error) {
+    //             }).save(function (error) {
 
-                    //handle error
-                    if (error) {
+    //                 //handle error
+    //                 if (error) {
 
-                        console.log("error", error);
+    //                     console.log("error", error);
 
-                    } else {
+    //                 } else {
 
-                        console.log(element," added to order type collection.");
+    //                     console.log(element," added to order type collection.");
 
-                    }
-                });
-            });
+    //                 }
+    //             });
+    //         });
 
-        }
+    //     }
 
-    });
+    // });
 
 }
 
@@ -149,5 +149,5 @@ require('./src/routes/authentication.routes')(application);
 require('./src/routes/user.routes')(application);
 require('./src/routes/product.routes')(application);
 require('./src/routes/shoppingcart.routes')(application);
-// require('./src/routes/friends.routes')(application);
-// require('./src/routes/posts.routes')(application);
+require('./src/routes/order.routes')(application);
+require('./src/routes/collection.routes')(application);

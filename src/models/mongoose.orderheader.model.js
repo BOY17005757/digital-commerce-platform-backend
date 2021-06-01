@@ -9,12 +9,23 @@ const OrderHeader = mongoose.model(
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         }],
-        typeId: [{
+        collectionId: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: "OrderType"
+            ref: "Collection"
         }],
-        address: String,
-        total: Number
+        delivery: String,
+        instructions: String,
+        type: String,
+        firstName: String,
+        lastName: String,
+        emailAddress: String,
+        country: String,
+        streetAddress: String,
+        city: String,
+        county: String,
+        postalCode: String,
+        total: Number,
+        status: String
     }, {
         timestamps: true
     })

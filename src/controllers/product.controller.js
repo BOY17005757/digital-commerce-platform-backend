@@ -269,6 +269,7 @@ exports.editProduct = (request, response) => {
                 });
 
                 return;
+                
             } else {
 
                 response.status(200).send(`Product edited. _id: ${request.body.productId}`);
