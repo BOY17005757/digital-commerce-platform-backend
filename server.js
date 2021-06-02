@@ -27,6 +27,14 @@ application.use(express.urlencoded({
 
 }));
 
+application.enable('trust proxy')
+
+application.use((request, response, next) => {
+
+    request.secure ? next() : response.redirect('https://' + request.headers.host + request.url)
+    
+})
+
 //listen for requests
 application.listen(port, function () {
 
@@ -39,7 +47,6 @@ application.get("/", function(request, response) {
     response.json({ message: "digital-commerce-platform-backend." });
 
 });
-
 
 //require database configuration
 const databaseConfig = require('./src/config/database.config');
