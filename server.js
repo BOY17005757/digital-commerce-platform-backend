@@ -50,6 +50,7 @@ const databaseConfig = require('./src/config/database.config');
 const database = require('./src/models');
 const Role = database.role;
 const OrderType = database.ordertype;
+const Manifest = database.manifest;
 
 //connect to mongodb
 database.mongoose.connect(databaseConfig.mongoAtlasUri, {
@@ -108,39 +109,64 @@ function initialise() {
 
     });
 
-    // const orderTypeArray = ['collection', 'delivery'];
+    Manifest.estimatedDocumentCount(function (error, count) {
 
-    // OrderType.estimatedDocumentCount(function (error, count) {
+        const ManifestJson = {
+            "theme_color": "#4f46e5",
+            "background_color": "#1f2937",
+            "display": "standalone",
+            "scope": `${corsParams.origin}/`,
+            "start_url": `${corsParams.origin}/index.html`,
+            "name": "Digital Commerce Platform",
+            "short_name": "Digital Commerce Platform",
+            "icons": [
+                {
+                    "src": `${corsParams.origin}/icon-192x192.png`,
+                    "sizes": "192x192",
+                    "type": "image/png"
+                },
+                {
+                    "src": `${corsParams.origin}/icon-256x256.png`,
+                    "sizes": "256x256",
+                    "type": "image/png"
+                },
+                {
+                    "src": `${corsParams.origin}/icon-384x384.png`,
+                    "sizes": "384x384",
+                    "type": "image/png"
+                },
+                {
+                    "src": `${corsParams.origin}/icon-512x512.png`,
+                    "sizes": "512x512",
+                    "type": "image/png"
+                }
+            ]
+        };
 
-    //     //no order types exist in mongodb
-    //     if (!error && count === 0) {
-        
-    //         //loop order type array
-    //         orderTypeArray.forEach(function(element) {
+        //manifest does not exist in mongodb
+        if (!error && count === 0) {
 
-    //             //create order type
-    //             new OrderType({
+            //create manifest
+            new Manifest({
+                fileName: 'manifest.json',
+                content: ManifestJson
+            }).save(function (error) {
 
-    //                 name: element
+                //handle error
+                if (error) {
 
-    //             }).save(function (error) {
+                    console.log("error", error);
 
-    //                 //handle error
-    //                 if (error) {
+                } else {
 
-    //                     console.log("error", error);
+                    console.log("Manifest added to collection.");
 
-    //                 } else {
+                }
+            });
 
-    //                     console.log(element," added to order type collection.");
+        }
 
-    //                 }
-    //             });
-    //         });
-
-    //     }
-
-    // });
+    });
 
 }
 
@@ -151,3 +177,4 @@ require('./src/routes/product.routes')(application);
 require('./src/routes/shoppingcart.routes')(application);
 require('./src/routes/order.routes')(application);
 require('./src/routes/collection.routes')(application);
+require('./src/routes/manifest.routes')(application);

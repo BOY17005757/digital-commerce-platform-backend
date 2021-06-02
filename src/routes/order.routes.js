@@ -26,13 +26,16 @@ module.exports = function (application) {
     //api (GET) order lines
     application.get('/api/orders/lines', [authenticationJwt.validateToken], controller.getOrderLines)
 
-    // //api (POST) create order
+    //api (POST) create order
     application.post("/api/orders/create", [authenticationJwt.validateToken], controller.createOrder)
 
-    // //api (POST) update order
+    //api (POST) update order
     application.post("/api/orders/update", [authenticationJwt.validateToken], controller.updateOrder)
 
-    // //api (DELETE) delete order
+    //api (DELETE) delete order
     application.delete('/api/orders/delete', [authenticationJwt.validateToken], controller.deleteOrder)
+
+    //api (DELETE) delete order line
+    application.delete('/api/orders/lines/delete', [authenticationJwt.validateToken], controller.deleteOrderLine)
 
 }

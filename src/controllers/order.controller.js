@@ -98,7 +98,43 @@ exports.getOrderHeaders = (request, response) => {
 
 exports.getOrderLines = (request, response) => {
 
+    OrderLine.find({
+        headerId: {
+            $in: request.query.headerId
+        }
+    })
+    //populate document references
+    .populate('productId', 'name description')
+    .sort({
+        createdAt: 'descending'
+    })
+    .exec(function (error, orderLines) {
 
+        //handle error and send 500 response
+        if (error) {
+
+            response.status(500).send({
+
+                message: error
+
+            });
+
+            return;
+        }
+
+        //no order lines found
+        if (!orderLines) {
+
+            return response.status(404).send({
+
+                message: "Order Lines Not found."
+
+            });
+        }
+
+        response.status(200).send(orderLines);
+
+    });
 
 }
 
@@ -201,6 +237,102 @@ exports.updateOrder = (request, response) => {
 
 exports.deleteOrder = (request, response) => {
 
+    OrderHeader.deleteOne({
+        _id: request.query.headerId
+    })
+    .exec(function (error, orderHeader) {
+
+        //handle error and send 500 response
+        if (error) {
+
+            response.status(500).send({
+
+                message: error
+
+            });
+
+            return;
+        }
+
+        //orderHeader not found
+        if (!orderHeader) {
+
+            return response.status(404).send({
+
+                message: "orderHeader not found."
+
+            });
+        }
+
+        //remove lines
+        OrderLine.deleteMany({
+            headerId: {
+                $in: request.query.headerId
+            }
+        })
+        .exec(function (error, orderLine) {
     
+            //handle error and send 500 response
+            if (error) {
+    
+                response.status(500).send({
+    
+                    message: error
+    
+                });
+    
+                return;
+            }
+    
+            //orderLine not found
+            if (!orderLine) {
+    
+                return response.status(404).send({
+    
+                    message: "order line not found."
+    
+                });
+            }
+    
+            response.status(200).send("order header and lines successfully removed.");
+    
+        });
+
+    });
+
+}
+
+exports.deleteOrderLine = (request, response) => {
+
+    OrderLine.deleteOne({
+        _id: request.query.lineId
+    })
+    .exec(function (error, orderLine) {
+
+        //handle error and send 500 response
+        if (error) {
+
+            response.status(500).send({
+
+                message: error
+
+            });
+
+            return;
+        }
+
+        //orderLine not found
+        if (!orderLine) {
+
+            return response.status(404).send({
+
+                message: "order line not found."
+
+            });
+        }
+
+        response.status(200).send("order line successfully removed.");
+
+    });
 
 }
