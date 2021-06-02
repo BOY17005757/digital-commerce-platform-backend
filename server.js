@@ -118,26 +118,82 @@ function initialise() {
             "name": "Digital Commerce Platform",
             "short_name": "Digital Commerce Platform",
             "icons": [
-                {
-                    "src": `${corsParams.origin}/icon-192x192.png`,
-                    "sizes": "192x192",
-                    "type": "image/png"
-                },
-                {
-                    "src": `${corsParams.origin}/icon-256x256.png`,
-                    "sizes": "256x256",
-                    "type": "image/png"
-                },
-                {
-                    "src": `${corsParams.origin}/icon-384x384.png`,
-                    "sizes": "384x384",
-                    "type": "image/png"
-                },
-                {
-                    "src": `${corsParams.origin}/icon-512x512.png`,
-                    "sizes": "512x512",
-                    "type": "image/png"
-                }
+              {
+                "src": `${corsParams.origin}/icon-512x512.png`,
+                "sizes": "512x512",
+                "type": "image/png",
+                "purpose": "any maskable"
+              },
+              {
+                "src": `${corsParams.origin}/favicon.ico`,
+                "sizes": "64x64 32x32 24x24 16x16",
+                "type": "image/x-icon"
+              },
+              {
+                "src": `${corsParams.origin}/android-icon-192x192.png`,
+                "type": "image/png",
+                "sizes": "192x192"
+              },
+              {
+                "src": `${corsParams.origin}/apple-icon-180x180.png`,
+                "type": "image/png",
+                "sizes": "180x180"
+              },
+              {
+                "src": `${corsParams.origin}/apple-icon-152x152.png`,
+                "type": "image/png",
+                "sizes": "152x152"
+              },
+              {
+                "src": `${corsParams.origin}/apple-icon-144x144.png`,
+                "type": "image/png",
+                "sizes": "144x144"
+              },
+              {
+                "src": `${corsParams.origin}/apple-icon-120x120.png`,
+                "type": "image/png",
+                "sizes": "120x120"
+              },
+              {
+                "src": `${corsParams.origin}/apple-icon-114x114.png`,
+                "type": "image/png",
+                "sizes": "114x114"
+              },
+              {
+                "src": `${corsParams.origin}/favicon-96x96.png`,
+                "type": "image/png",
+                "sizes": "96x96"
+              },
+              {
+                "src": `${corsParams.origin}/apple-icon-76x76.png`,
+                "type": "image/png",
+                "sizes": "76x76"
+              },
+              {
+                "src": `${corsParams.origin}/apple-icon-72x72.png`,
+                "type": "image/png",
+                "sizes": "72x72"
+              },
+              {
+                "src": `${corsParams.origin}/apple-icon-60x60.png`,
+                "type": "image/png",
+                "sizes": "60x60"
+              },
+              {
+                "src": `${corsParams.origin}/apple-icon-57x57.png`,
+                "type": "image/png",
+                "sizes": "57x57"
+              },
+              {
+                "src": `${corsParams.origin}/favicon-32x32.png`,
+                "type": "image/png",
+                "sizes": "32x32"
+              },
+              {
+                "src": `${corsParams.origin}/favicon-16x16.png`,
+                "type": "image/png",
+                "sizes": "16x16"
+              }
             ]
         };
 
