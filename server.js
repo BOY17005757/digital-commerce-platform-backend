@@ -11,8 +11,7 @@ var corsParams = {
 };
 
 //set listening port based on production or development environment
-// const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 8080;
-const port = 8080;
+const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 8080;
 
 //use cors parameters
 application.use(cors(corsParams));
