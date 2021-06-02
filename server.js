@@ -6,8 +6,7 @@ const application = express();
 //set cors hostname & port
 var corsParams = {
 
-    // origin: process.env.NODE_ENV === 'production' ? "https://social-link-frontend.herokuapp.com" : "http://localhost:3000"
-    origin: "http://localhost:3000"
+    origin: process.env.NODE_ENV === 'production' ? "https://digital-commerce-platform.herokuapp.com" : "http://localhost:3000"
 
 };
 
