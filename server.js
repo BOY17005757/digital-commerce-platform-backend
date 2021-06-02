@@ -1,4 +1,5 @@
 //include packages
+import sslRedirect from 'heroku-ssl-redirect';
 const express = require('express');
 const cors = require('cors');
 const application = express();
@@ -13,6 +14,9 @@ var corsParams = {
 //set listening port based on production or development environment
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 8080;
 
+// enable ssl redirect
+application.use(sslRedirect());
+
 //use cors parameters
 application.use(cors(corsParams));
 
@@ -26,14 +30,6 @@ application.use(express.urlencoded({
     extended: true
 
 }));
-
-application.enable('trust proxy')
-
-application.use((request, response, next) => {
-
-    request.secure ? next() : response.redirect('https://' + request.headers.host + request.url)
-    
-})
 
 //listen for requests
 application.listen(port, function () {
