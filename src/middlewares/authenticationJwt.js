@@ -115,81 +115,10 @@ function validateAdministrator(request, response, next) {
     });
 }
 
-//validate moderator
-// function validateModerator(request, response, next) {
-
-//     //check valid userid
-//     User.findById(request.userId).exec(function (error, user) {
-
-//         //handle error and send 500 response
-//         if (error) {
-
-//             response.status(500).send({
-//                 message: error
-//             });
-//             return;
-
-//         }
-
-//         //find all documents in a collection that match query
-//         Role.find({
-//                 //$in - matches any of the values specified in an array
-//                 _id: {
-//                     $in: user.roleNames
-//                 }
-//             },
-//             (error, roleNames) => {
-
-//                 //handle error and send 500 response
-//                 if (error) {
-
-//                     response.status(500).send({
-//                         message: error
-//                     });
-//                     return;
-
-//                 }
-
-//                 //loop through user roleNames
-//                 roleNames.forEach(function (currentValue, currentIndex, listObj) {
-
-//                     roleCheck = false;
-
-//                     //check for administrator role
-//                     if (currentValue.roleName === "moderator") {
-
-//                         roleCheck = false;
-//                         next();
-//                         return;
-
-//                     } else {
-
-//                         roleCheck = true;
-
-//                     }
-//                 });
-
-//                 //administrator role not found
-//                 if (roleCheck) {
-
-//                     //throw 403 access forbidden response
-//                     response.status(403).send({
-//                         message: "Moderator role required."
-//                     });
-//                     return;
-
-//                 }
-
-//             });
-
-//     });
-// }
-
 const authenticationJwt = {
 
     validateToken,
     validateAdministrator
-    // validateModerator
 
 };
 

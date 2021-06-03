@@ -14,7 +14,6 @@ database.mongoose = mongoose;
 database.user = require('./mongoose.user.model');
 database.role = require('./mongoose.role.model');
 database.product = require('./mongoose.product.model');
-database.site = require('./mongoose.site.model');
 database.shoppingcart = require('./mongoose.shoppingcart.model');
 database.orderheader = require('./mongoose.orderheader.model');
 database.orderline = require('./mongoose.orderline.model');
