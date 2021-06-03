@@ -27,6 +27,25 @@ application.use(express.urlencoded({
 
 }));
 
+app.use((request, response, next) => {
+
+  if (process.env.NODE_ENV === 'production') {
+
+    if (request.headers['x-forwarded-proto'] !== 'https')
+
+      // the statement for performing our redirection
+      return response.redirect('https://' + request.headers.host + request.url);
+
+    else
+
+      return next();
+
+} else
+
+  return next();
+
+});
+
 //listen for requests
 application.listen(port, function () {
 
