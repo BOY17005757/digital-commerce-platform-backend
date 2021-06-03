@@ -7,8 +7,11 @@ const Product = mongoose.model(
     new mongoose.Schema({
         name: String,
         description: String,
-        price: String,
-        status: Boolean,
+        price: Number,
+        status: { 
+            type: Boolean,
+            default: true 
+        }
     }, {
         timestamps: true
     })

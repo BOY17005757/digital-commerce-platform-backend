@@ -25,7 +25,10 @@ const OrderHeader = mongoose.model(
         county: String,
         postalCode: String,
         total: Number,
-        status: String
+        status: {
+            type: String,
+            default: "Pending" 
+        }
     }, {
         timestamps: true
     })
