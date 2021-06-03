@@ -20,17 +20,8 @@ module.exports = function (application) {
     //api (GET) public content
     application.get("/api/access/public", controller.publicAccess);
 
-    //api (GET) user content
-    // application.get("/api/access/user", [authenticationJwt.validateToken], controller.userFeed);
-
     //api (GET) profile content
     application.get("/api/access/profile", [authenticationJwt.validateToken], controller.profile);
-
-    //api (GET) user via search
-    // application.get("/api/access/search", [authenticationJwt.validateToken], controller.getSearch);
-
-    //api (GET) moderator content
-    // application.get("/api/access/moderator", [authenticationJwt.validateToken, authenticationJwt.validateModerator], controller.moderatorAccess);
 
     //api (GET) administrator content
     application.get("/api/access/administrator", [authenticationJwt.validateToken, authenticationJwt.validateAdministrator], controller.administratorAccess);
