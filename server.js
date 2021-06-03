@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const application = express();
+var forceSsl = require('force-ssl-heroku');
 
 //set cors hostname & port
 var corsParams = {
@@ -12,6 +13,8 @@ var corsParams = {
 
 //set listening port based on production or development environment
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 8080;
+
+application.use(forceSsl);
 
 //use cors parameters
 application.use(cors(corsParams));
