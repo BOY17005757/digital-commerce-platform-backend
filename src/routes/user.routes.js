@@ -17,9 +17,6 @@ module.exports = function (application) {
         next();
     });
 
-    //api (GET) public content
-    application.get("/api/access/public", controller.publicAccess);
-
     //api (GET) profile content
     application.get("/api/access/profile", [authenticationJwt.validateToken], controller.profile);
 

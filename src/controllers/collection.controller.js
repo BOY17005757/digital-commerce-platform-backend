@@ -9,6 +9,8 @@ const Collection = database.collection;
 
 exports.getCollections = (request, response) => {
 
+    //TODO: active query parameter to display collections not used or in past
+
     Collection.find({
     })
     .sort({
