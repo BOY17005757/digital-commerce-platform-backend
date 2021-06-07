@@ -20,6 +20,7 @@ database.orderline = require('./mongoose.orderline.model');
 database.collection = require('./mongoose.collection.model');
 database.manifest = require('./mongoose.manifest.model');
 database.contact = require('./mongoose.contact.model');
+database.productImage = require('./mongoose.productImage.model');
 
 //define default roles
 database.roleNames = ['customer','administrator'];

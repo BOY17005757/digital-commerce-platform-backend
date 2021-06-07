@@ -233,7 +233,7 @@ exports.removeUser = (request, response) => {
 
             response.status(200).send("User successfully removed.");
 
-            //TODO: remove all associated orders
+            //TODO: remove all associated orders & shopping cart
 
         });
 

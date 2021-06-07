@@ -232,3 +232,4 @@ require('./src/routes/order.routes')(application);
 require('./src/routes/collection.routes')(application);
 require('./src/routes/manifest.routes')(application);
 require('./src/routes/contact.routes')(application);
+require('./src/routes/productImage.routes')(application);
