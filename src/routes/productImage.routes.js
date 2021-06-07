@@ -20,10 +20,12 @@ module.exports = function (application) {
         next();
     });
 
-    //api (GET) products
+    //api (GET) product images
     application.get('/api/productimage', controller.getProductImage)
 
     //api (POST) upload product image
-    application.post("/api/productimage/upload",upload.single('image'), [authenticationJwt.validateToken, authenticationJwt.validateAdministrator], controller.uploadProductImage)
+    application.post("/api/productimage/upload",upload.single('image'), controller.uploadProductImage)
+
+    // [authenticationJwt.validateToken, authenticationJwt.validateAdministrator],
 
 }

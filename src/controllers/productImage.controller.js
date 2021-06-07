@@ -13,6 +13,9 @@ exports.getProductImage = (request, response) => {
             $in: request.query.productId
         }
     })
+    // .sort({
+    //     createdAt: 'descending'
+    // })
     .exec(function (error, product) {
 
         //handle error and send 500 response
@@ -58,11 +61,13 @@ exports.uploadProductImage = (request, response) => {
         
     };
 
-    new ProductImage({
-        productId: request.query.productId,
-        base64Image: finalImg
+    //check if image exists, if so then update otherwise create new
+    ProductImage.findOne({
+        productId: {
+            $in: request.query.productId
+        }
     })
-    .save(function (error, product) {
+    .exec(function (error, productimage) {
 
         //handle error and send 500 response
         if (error) {
@@ -74,12 +79,70 @@ exports.uploadProductImage = (request, response) => {
             });
 
             return;
-            
+        }
+
+        //no product image found
+        if (!productimage) {
+
+            new ProductImage({
+                productId: request.query.productId,
+                base64Image: finalImg
+            })
+            .save(function (error, productimage) {
+
+                //handle error and send 500 response
+                if (error) {
+
+                    response.status(500).send({
+
+                        message: error
+
+                    });
+
+                    return;
+                    
+                } else {
+
+                    response.status(200).send(`Product image uploaded. _id: ${request.query.productId}`);
+
+                }
+            });
+
         } else {
 
-            response.status(200).send(`Product image uploaded. _id: ${request.query.productId}`);
+            //update existing product image
+            ProductImage.findOneAndUpdate({
+                productId: {
+                    $in: request.query.productId
+                }
+
+            }, {
+                base64Image: finalImg
+            },
+            function (error, product) {
+
+                //handle error and send 500 response
+                if (error) {
+        
+                    response.status(500).send({
+        
+                        message: error
+        
+                    });
+        
+                    return;
+        
+                } else {
+        
+                    response.status(200).send(`Product image updated. _id: ${request.query.productId}`);
+
+                }
+
+            });
 
         }
+
+
     });
 
 }
