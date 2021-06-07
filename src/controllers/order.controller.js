@@ -1,19 +1,13 @@
 //require database models
 const database = require('../models');
-const Post = database.post;
-const Product = database.product;
 const ShoppingCart = database.shoppingcart;
 const OrderHeader = database.orderheader;
 const OrderLine = database.orderline;
 
-exports.getOrderHeader = (request, response) => {
-
-
-
-}
-
+//handle returning order headers
 exports.getOrderHeaders = (request, response) => {
 
+    //return orders for a specific user
     if(request.query.userId) {
 
         OrderHeader.find({
@@ -55,6 +49,7 @@ exports.getOrderHeaders = (request, response) => {
 
         });
 
+    //return all orders
     } else {
 
         OrderHeader.find()
@@ -96,6 +91,7 @@ exports.getOrderHeaders = (request, response) => {
 
 }
 
+//handle returning order lines
 exports.getOrderLines = (request, response) => {
 
     OrderLine.find({
@@ -138,8 +134,10 @@ exports.getOrderLines = (request, response) => {
 
 }
 
+//handle creating new order headers and lines
 exports.createOrder = (request, response) => {
 
+    //create order header
     new OrderHeader({
         userId: request.body.userId,
         collectionId: request.body.collectionId,
@@ -201,6 +199,7 @@ exports.createOrder = (request, response) => {
 
             });
 
+            //delete users shopping cart
             ShoppingCart.deleteMany({
                 userId: {
                     $in: request.body.userId
@@ -229,14 +228,17 @@ exports.createOrder = (request, response) => {
 
 }
 
+//handle updating existing order
 exports.updateOrder = (request, response) => {
 
-    
+    //not completed
 
 }
 
+//handle deleting an order header and associated lines
 exports.deleteOrder = (request, response) => {
 
+    //delete order header
     OrderHeader.deleteOne({
         _id: request.query.headerId
     })
@@ -254,7 +256,7 @@ exports.deleteOrder = (request, response) => {
             return;
         }
 
-        //orderHeader not found
+        //order header not found
         if (!orderHeader) {
 
             return response.status(404).send({
@@ -264,7 +266,7 @@ exports.deleteOrder = (request, response) => {
             });
         }
 
-        //remove lines
+        //delete associated order lines
         OrderLine.deleteMany({
             headerId: {
                 $in: request.query.headerId
@@ -284,7 +286,7 @@ exports.deleteOrder = (request, response) => {
                 return;
             }
     
-            //orderLine not found
+            //order line not found
             if (!orderLine) {
     
                 return response.status(404).send({
@@ -302,8 +304,10 @@ exports.deleteOrder = (request, response) => {
 
 }
 
+//handle deleting order line
 exports.deleteOrderLine = (request, response) => {
 
+    //delete order line
     OrderLine.deleteOne({
         _id: request.query.lineId
     })
@@ -321,7 +325,7 @@ exports.deleteOrderLine = (request, response) => {
             return;
         }
 
-        //orderLine not found
+        //order line not found
         if (!orderLine) {
 
             return response.status(404).send({

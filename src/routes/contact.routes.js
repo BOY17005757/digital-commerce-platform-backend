@@ -20,10 +20,10 @@ module.exports = function (application) {
     //api (GET) contact messages
     application.get('/api/contact', [authenticationJwt.validateToken], [authenticationJwt.validateAdministrator], controller.getContactMessages)
 
-    //api (POST) create contact messages
+    //api (POST) create contact message
     application.post("/api/contact/new", controller.newContactMessage)
 
-    //api (DELETE) remove contact messages
+    //api (DELETE) remove contact message
     application.delete('/api/contact/remove', [authenticationJwt.validateToken], [authenticationJwt.validateAdministrator], controller.removeContactMessage)
 
 }

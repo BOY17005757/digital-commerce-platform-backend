@@ -1,21 +1,18 @@
 //require database models
 const database = require('../models');
-const Post = database.post;
-const Product = database.product;
 const ProductImage = database.productImage;
-const multer  = require('multer')
+const multer  = require('multer');
 const fs = require('fs');
 
+//handle returning product image
 exports.getProductImage = (request, response) => {
 
+    //find product image
     ProductImage.findOne({
         productId: {
             $in: request.query.productId
         }
     })
-    // .sort({
-    //     createdAt: 'descending'
-    // })
     .exec(function (error, product) {
 
         //handle error and send 500 response
@@ -30,7 +27,7 @@ exports.getProductImage = (request, response) => {
             return;
         }
 
-        //no product found
+        //no product image found
         if (!product) {
 
             return response.status(404).send({
@@ -40,6 +37,7 @@ exports.getProductImage = (request, response) => {
             });
         }
 
+        //set response content type for image
         response.contentType('image/jpeg');
 
         response.status(200).send(product.base64Image.image.buffer);
@@ -51,6 +49,7 @@ exports.getProductImage = (request, response) => {
 //handle product image upload
 exports.uploadProductImage = (request, response) => {
 
+    //encode image in base64 binary
     var img = fs.readFileSync(request.file.path);
     var encode_image = img.toString('base64');
     
@@ -84,6 +83,7 @@ exports.uploadProductImage = (request, response) => {
         //no product image found
         if (!productimage) {
 
+            //create new product image
             new ProductImage({
                 productId: request.query.productId,
                 base64Image: finalImg
@@ -141,7 +141,6 @@ exports.uploadProductImage = (request, response) => {
             });
 
         }
-
 
     });
 

@@ -23,7 +23,7 @@ module.exports = function (application) {
     //api (POST) add shopping cart product
     application.post("/api/shoppingcart/add", [authenticationJwt.validateToken], controller.addShoppingCartProduct)
 
-    //api (POST) decrement shopping cart prodyuct
+    //api (POST) decrement shopping cart product
     application.post("/api/shoppingcart/decrement", [authenticationJwt.validateToken], controller.decrementShoppingCartProduct)
 
     //api (DELETE) remove shopping cart product

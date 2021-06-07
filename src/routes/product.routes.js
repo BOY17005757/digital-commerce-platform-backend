@@ -23,7 +23,7 @@ module.exports = function (application) {
     //api (GET) product
     application.get('/api/products/detail/', controller.getProduct)
 
-    //api (POST) create product
+    //api (POST) create individual product
     application.post("/api/products/new", [authenticationJwt.validateToken], controller.newProduct)
 
     //api (DELETE) remove product

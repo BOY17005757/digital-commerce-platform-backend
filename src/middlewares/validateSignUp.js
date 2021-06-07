@@ -4,7 +4,6 @@ const roleNames = database.roleNames;
 
 //include database models
 const User = database.user;
-const Role = database.role;
 
 var roleCheck;
 

@@ -1,11 +1,8 @@
 //require database models
 const database = require('../models');
-const Post = database.post;
-const Product = database.product;
-const ShoppingCart = database.shoppingcart;
 const Manifest = database.manifest;
 
-//handle get manifest
+//handle returning manifest
 exports.getManifest = (request, response) => {
 
     Manifest.findOne({
@@ -43,6 +40,7 @@ exports.getManifest = (request, response) => {
 //handle edit manifest
 exports.editManifest = (request, response) => {
 
+    //check manifest exists
     Manifest.findOne({
     })
     .exec(function (error, manifest) {
@@ -69,30 +67,31 @@ exports.editManifest = (request, response) => {
             });
         }
 
-            Manifest.updateOne({
-                _id: manifest._id
-            }, {
-                content: request.body.content
-            })
-            .exec(function (error, product) {
-        
-                //handle error and send 500 response
-                if (error) {
-        
-                    response.status(500).send({
-        
-                        message: `Manifest not found. ${error}`
-        
-                    });
-        
-                    return;
-                    
-                } else {
-        
-                    response.status(200).send("Manifest edited successfully.");
-        
-                }
-            });
+        //update manifest
+        Manifest.updateOne({
+            _id: manifest._id
+        }, {
+            content: request.body.content
+        })
+        .exec(function (error, product) {
+    
+            //handle error and send 500 response
+            if (error) {
+    
+                response.status(500).send({
+    
+                    message: `Manifest not found. ${error}`
+    
+                });
+    
+                return;
+                
+            } else {
+    
+                response.status(200).send("Manifest edited successfully.");
+    
+            }
+        });
 
     });
 

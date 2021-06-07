@@ -1,7 +1,7 @@
 //include packages
 const mongoose = require('mongoose');
 
-//define product model
+//define shopping cart model
 const ShoppingCart = mongoose.model(
     "ShoppingCart",
     new mongoose.Schema({

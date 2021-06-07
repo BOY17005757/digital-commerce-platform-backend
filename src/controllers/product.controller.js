@@ -3,20 +3,16 @@ const database = require('../models');
 const Post = database.post;
 const Product = database.product;
 
-//
+//handle returning products
 exports.getProducts = (request, response) => {
 
-    //TODO: get only active, search query?
-
-    //true return only active
+    //return active products only
     if(request.query.active === 'true') {
 
         //find active products
         Product.find({
             status: request.query.active
         })
-        //populate document references
-        // .populate('roleNames', 'roleName')
         .sort({
             createdAt: 'descending'
         })
@@ -48,12 +44,11 @@ exports.getProducts = (request, response) => {
 
         });
 
+    //return all products
     } else {
 
         //find all products
         Product.find({})
-        //populate document references
-        // .populate('roleNames', 'roleName')
         .sort({
             createdAt: 'descending'
         })
@@ -89,10 +84,10 @@ exports.getProducts = (request, response) => {
 
 };
 
-//
+//handle returning product
 exports.getProduct = (request, response) => {
 
-    //true return only active
+    //return active product only
     if(request.query.active === 'true') {
 
         //find active product
@@ -100,11 +95,6 @@ exports.getProduct = (request, response) => {
             _id: request.query.productId,
             status: true
         })
-        //populate document references
-        // .populate('roleNames', 'roleName')
-        // .sort({
-        //     createdAt: 'descending'
-        // })
         .exec(function (error, product) {
 
             //handle error and send 500 response
@@ -133,19 +123,13 @@ exports.getProduct = (request, response) => {
 
         });
 
+    //return products
     } else {
-
-        //TODO: check admin access
 
         //find product
         Product.findOne({
             _id: request.query.productId
         })
-        //populate document references
-        // .populate('roleNames', 'roleName')
-        // .sort({
-        //     createdAt: 'descending'
-        // })
         .exec(function (error, product) {
 
             //handle error and send 500 response
@@ -210,8 +194,6 @@ exports.newProduct = (request, response) => {
 
 //handle remove product
 exports.removeProduct = (request, response) => {
-
-    //TODO: validate administrator
 
     Product.deleteOne({
         _id: request.query.productId

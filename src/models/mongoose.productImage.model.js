@@ -1,7 +1,7 @@
 //include packages
 const mongoose = require('mongoose');
 
-//define image model
+//define product image model
 const ProductImage = mongoose.model(
     "ProductImage",
     new mongoose.Schema({

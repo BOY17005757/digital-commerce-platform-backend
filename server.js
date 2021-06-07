@@ -46,7 +46,6 @@ const databaseConfig = require('./src/config/database.config');
 //require database models
 const database = require('./src/models');
 const Role = database.role;
-const OrderType = database.ordertype;
 const Manifest = database.manifest;
 
 //connect to mongodb
@@ -106,6 +105,7 @@ function initialise() {
 
     });
 
+    //define pwa manifest template
     Manifest.estimatedDocumentCount(function (error, count) {
 
         const ManifestJson = {
@@ -223,7 +223,7 @@ function initialise() {
 
 }
 
-// //define api routes
+//define api routes
 require('./src/routes/authentication.routes')(application);
 require('./src/routes/user.routes')(application);
 require('./src/routes/product.routes')(application);

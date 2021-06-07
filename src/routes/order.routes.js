@@ -17,9 +17,6 @@ module.exports = function (application) {
         next();
     });
 
-    //api (GET) order header
-    // application.get('/api/orders/header', [authenticationJwt.validateToken], controller.getOrderHeader)
-
     //api (GET) order headers
     application.get('/api/orders/headers', [authenticationJwt.validateToken], controller.getOrderHeaders)
 

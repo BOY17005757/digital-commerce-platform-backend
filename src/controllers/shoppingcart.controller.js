@@ -1,20 +1,17 @@
 //require database models
 const database = require('../models');
-const Post = database.post;
-const Product = database.product;
 const ShoppingCart = database.shoppingcart;
 
+//handle returning users shopping cart
 exports.getShoppingCartProducts = (request, response) => {
 
-    //find active products
+    //find shopping cart
     ShoppingCart.find({
-        // userId: request.query.userId
         userId: {
             $in: request.query.userId
         }
     })
     //populate document references
-    // .populate('userId', 'username')
     .populate('productId', 'name price')
     .sort({
         createdAt: 'descending'
@@ -52,11 +49,8 @@ exports.getShoppingCartProducts = (request, response) => {
 //handle add shopping cart product
 exports.addShoppingCartProduct = (request, response) => {
 
-    // console.log(request.body.userId,request.body.productId,request.body.quantity)
-
-    //find active products
+    //find shopping cart product
     ShoppingCart.find({
-        // userId: request.query.userId
         productId: {
             $in: request.body.productId
         }
@@ -75,7 +69,7 @@ exports.addShoppingCartProduct = (request, response) => {
             return;
         }
 
-        //no existingProduct found
+        //product not already in shopping cart
         if (Object.keys(existingProduct).length === 0) {
 
             //create new shopping cart product
@@ -143,9 +137,8 @@ exports.addShoppingCartProduct = (request, response) => {
 //handle remove shopping cart product
 exports.decrementShoppingCartProduct = (request, response) => {
 
-    //find active products
+    //find shopping cart
     ShoppingCart.find({
-        // userId: request.query.userId
         productId: {
             $in: request.body.productId
         }

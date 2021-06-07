@@ -1,9 +1,6 @@
 //require database models
 const database = require('../models');
-const Post = database.post;
 const User = database.user;
-const Friend = database.friend;
-const Product = database.product;
 
 //fetch profile content
 exports.profile = (request, response) => {
@@ -46,7 +43,7 @@ exports.profile = (request, response) => {
 
 }
 
-//administrator access - return 200 OK response
+//administrator access - return users
 exports.administratorAccess = (request, response) => {
 
     //find all users

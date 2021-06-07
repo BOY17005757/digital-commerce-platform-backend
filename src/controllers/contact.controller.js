@@ -1,12 +1,11 @@
 //require database models
 const database = require('../models');
-const Post = database.post;
-const Product = database.product;
 const Contact = database.contact;
 
-//
+//handle returning contact messages
 exports.getContactMessages = (request, response) => {
 
+    //find contact messages
     Contact.find({
     })
     //populate document references
@@ -44,9 +43,10 @@ exports.getContactMessages = (request, response) => {
 
 };
 
-//handle new new contact message
+//handle new contact message
 exports.newContactMessage = (request, response) => {
 
+    //create new contact message
     new Contact({
         name: request.body.name,
         emailAddress: request.body.emailAddress,
@@ -77,6 +77,7 @@ exports.newContactMessage = (request, response) => {
 //handle remove contact message
 exports.removeContactMessage = (request, response) => {
 
+    //delete contact message
     Contact.deleteOne({
         _id: request.query.contactId
     })

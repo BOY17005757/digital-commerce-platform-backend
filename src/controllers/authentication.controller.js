@@ -5,12 +5,10 @@ const configuration = require('../config/authentication.config');
 const database = require('../models');
 const User = database.user;
 const Role = database.role;
-const Friend = database.friend;
 
-//java web token & bcrypt password-hashing
+//json web token & bcrypt password-hashing
 var jsonWebToken = require('jsonwebtoken');
 var bcryptHash = require('bcryptjs');
-// const Post = require('../models/mongoose.post.model');
 
 //handle signup
 exports.signUp = (request, response) => {

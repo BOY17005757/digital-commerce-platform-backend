@@ -20,10 +20,10 @@ module.exports = function (application) {
     //api (GET) collections
     application.get('/api/collections', [authenticationJwt.validateToken], controller.getCollections)
 
-    // //api (POST) create collection
+    //api (POST) create collection
     application.post("/api/collections/create", [authenticationJwt.validateToken], controller.createCollection)
 
-    // //api (DELETE) delete collection
+    //api (DELETE) delete collection
     application.delete('/api/collections/delete', [authenticationJwt.validateToken], controller.deleteCollection)
 
 }

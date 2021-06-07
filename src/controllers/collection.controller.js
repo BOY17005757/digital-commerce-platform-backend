@@ -1,16 +1,11 @@
 //require database models
 const database = require('../models');
-const Post = database.post;
-const Product = database.product;
-const ShoppingCart = database.shoppingcart;
-const OrderHeader = database.orderheader;
-const OrderLine = database.orderline;
 const Collection = database.collection;
 
+//handle returning collections
 exports.getCollections = (request, response) => {
 
-    //TODO: active query parameter to display collections not used or in past
-
+    //find collections
     Collection.find({
     })
     .sort({
@@ -46,8 +41,10 @@ exports.getCollections = (request, response) => {
 
 }
 
+//handle creating new collection
 exports.createCollection = (request, response) => {
 
+    //create collection
     new Collection({
         dateTimeFrom: request.body.dateTimeFrom,
         dateTimeTo: request.body.dateTimeTo
@@ -74,8 +71,10 @@ exports.createCollection = (request, response) => {
 
 }
 
+//handle deleting collection
 exports.deleteCollection = (request, response) => {
 
+    //delete collection
     Collection.deleteOne({
         _id: request.query.collectionId
     })

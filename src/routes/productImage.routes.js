@@ -24,8 +24,6 @@ module.exports = function (application) {
     application.get('/api/productimage', controller.getProductImage)
 
     //api (POST) upload product image
-    application.post("/api/productimage/upload",upload.single('image'), controller.uploadProductImage)
-
-    // [authenticationJwt.validateToken, authenticationJwt.validateAdministrator],
+    application.post("/api/productimage/upload",upload.single('image'),[authenticationJwt.validateToken, authenticationJwt.validateAdministrator], controller.uploadProductImage)
 
 }
